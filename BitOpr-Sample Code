@@ -1,0 +1,205 @@
+//---------------------------------------------------------------------------
+#include <vcl.h>
+#pragma hdrstop
+//---------------------------------------------------------------------------
+struct test_struct
+{
+  char      member_of_char_type;
+  //char      member_of_char_type1;
+
+  short int member_of_s_int_type;
+  long int  member_of_l_int_type;
+
+  unsigned char Bit0 : 1;
+  unsigned char Bit1 : 1;
+  unsigned char Bit2 : 1;
+  unsigned char Bit3 : 1;
+  unsigned char Bit4 : 1;
+  unsigned char Bit5 : 1;
+  unsigned char Bit6 : 1;
+  unsigned char Bit7 : 1;
+
+};
+//------------------------------------------------------------
+
+union test_union
+{
+  char      member_of_char_type;
+
+  struct bit_in_struct{
+                          unsigned char Bit0 : 1;
+                          unsigned char Bit1 : 1;
+                          unsigned char Bit2 : 1;
+                          unsigned char Bit3 : 1;
+                          unsigned char Bit4 : 1;
+                          unsigned char Bit5 : 1;
+                          unsigned char Bit6 : 1;
+                          unsigned char Bit7 : 1;
+
+         }struct_bit_in_Union ;
+
+
+  short int member_of_s_int_type;
+  long int  member_of_l_int_type;
+};
+//----------------------------------------------------------
+
+
+
+typedef struct test_struct (Original_struct);
+typedef union test_union (Original_union);
+
+
+#pragma argsused
+int main(int argc, char* argv[])
+{
+
+  int byte_size1=0;
+  int byte_size2=0;
+  int byte_size3=0;
+  int byte_size4=0;
+  int byte_size5=0;
+  int byte_size6=0;
+  int byte_size7=0;
+  int byte_size8=0;
+  int byte_size9=0;
+
+
+  int check_value1;
+  int check_value2;
+  int check_value3;
+  int check_value4;
+  int check_value5;
+
+  int check_value10=0;
+  int check_value11=0;
+  int check_value12=0;
+  int check_value13=0;
+  int check_value14=0;
+  int check_value15=0;
+  int check_value16=0;
+  int check_value17=0;
+
+  int check_value20=0;
+  int check_value21=0;
+  int check_value22=0;
+  int check_value23=0;
+  int check_value24=0;
+  int check_value25=0;
+  int check_value26=0;
+  int check_value27=0;
+
+
+
+  char      test_char;
+  short int test_s_int;
+  long int  test_l_int;
+
+  Original_struct user_struct;
+  Original_union  user_union;
+
+
+  byte_size2 = sizeof(test_char);
+
+  byte_size1 = byte_size1 + byte_size1;
+
+  byte_size2 = sizeof(test_s_int);
+
+  byte_size1 = byte_size1 + byte_size1;
+
+  byte_size2 = sizeof(test_l_int);
+
+  byte_size1 = byte_size1 + byte_size1;
+
+
+  //--------------------------------------------------------
+
+  byte_size4 = sizeof(user_struct.member_of_char_type);
+
+  byte_size3  = byte_size3 + byte_size4;
+
+  //byte_size4 = sizeof(user_struct.member_of_char_type1);
+
+  //byte_size3  = byte_size3 + byte_size4;
+
+
+  byte_size4 = sizeof(user_struct.member_of_s_int_type);
+
+  byte_size3 = byte_size3 + byte_size4;
+
+  byte_size4 = sizeof(user_struct.member_of_l_int_type);
+
+  byte_size3 = byte_size3 + byte_size4;
+
+  //--------------------------------------------------------
+
+  byte_size5 = sizeof(user_struct);
+
+
+  user_struct.Bit0=0;
+  user_struct.Bit1=0;
+  user_struct.Bit2=0;
+  user_struct.Bit3=1;
+  user_struct.Bit4=0;
+  user_struct.Bit5=0;
+  user_struct.Bit6=0;
+  user_struct.Bit7=1;
+
+  check_value10 = user_struct.Bit0;
+  check_value11 = user_struct.Bit1;
+  check_value12 = user_struct.Bit2;
+  check_value13 = user_struct.Bit3;
+  check_value14 = user_struct.Bit4;
+  check_value15 = user_struct.Bit5;
+  check_value16 = user_struct.Bit6;
+  check_value17 = user_struct.Bit7;
+
+  //--------------------------------------------------------
+  byte_size5  = sizeof(user_union.member_of_char_type);
+  byte_size6  = sizeof(user_union.member_of_s_int_type);
+  byte_size7  = sizeof(user_union.member_of_l_int_type);
+  byte_size8  = sizeof(user_union.struct_bit_in_Union);
+
+  byte_size9  = sizeof(user_union);
+
+
+  //user_union.member_of_char_type=3;
+  //check_value1 = user_union.member_of_char_type;
+
+
+  user_union.struct_bit_in_Union.Bit0=1;
+  user_union.struct_bit_in_Union.Bit1=1;
+  user_union.struct_bit_in_Union.Bit2=1;
+  user_union.struct_bit_in_Union.Bit3=0;
+  user_union.struct_bit_in_Union.Bit4=1;
+  user_union.struct_bit_in_Union.Bit5=1;
+  user_union.struct_bit_in_Union.Bit6=1;
+  user_union.struct_bit_in_Union.Bit7=0;
+
+
+  check_value1 = user_union.member_of_char_type;
+  check_value2 = user_union.member_of_s_int_type;
+  check_value3 = user_union.member_of_l_int_type;
+
+  //--------------------------------------------------------
+
+
+  user_union.member_of_l_int_type=0x12345678;
+
+  check_value1 = user_union.member_of_char_type;
+  check_value2 = user_union.member_of_s_int_type;
+  check_value3 = user_union.member_of_l_int_type;
+
+  check_value20=user_union.struct_bit_in_Union.Bit0;
+  check_value21=user_union.struct_bit_in_Union.Bit1;
+  check_value22=user_union.struct_bit_in_Union.Bit2;
+  check_value23=user_union.struct_bit_in_Union.Bit3;
+  check_value24=user_union.struct_bit_in_Union.Bit4;
+  check_value25=user_union.struct_bit_in_Union.Bit5;
+  check_value26=user_union.struct_bit_in_Union.Bit6;
+  check_value27=user_union.struct_bit_in_Union.Bit7;
+
+
+  return 0;
+}
+//---------------------------------------------------------------------------
